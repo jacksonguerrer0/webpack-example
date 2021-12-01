@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webpack</title>
+</head>
+<body>
+  <h2>Webpack sin configruación</h2>
+  instalar las dependencias en desarrollo yarn add <code>webpack webpack-cli --dev</code>
+  <br>
+  Configurar el script <code>  "build": "webpack"</code>-d
+  <br>
+  Es importante tener en cuenta el modo a desarrollar ya sea en modo producción o modo de desarrollo
+  <br>
+  <b>Importante:</b> Conocer los puntos de entradas (--entry .direccion.) y salidas (--output-path .direccion.).
+  <h2>Babel :o</h2>
+  1. Instalar las dependencias en dev necesarias para trabajar con babel <code>yarn add babel-loader @babel/core @babel/preset-env --dev</code> <br>
+  2. Crear un archivo .babelrc y hacer sus respectivas configruaciones <br>
+  3. Crear un archivo webpack.config.js y hacer sus respectivas configuraciones
+  <hr>
+  <h2>Inyección de Js en HTML</h2>
+  1. Instalar las dependencias de desarrollo <code>yarn add html-loader html-webpack-plugin --dev</code>
+  <hr>
+  <h2>Estracción de css</h2>
+  1. Instalar las dependencias de desarrollo <code>yarn add mini-css-extract-plugin css-loader style-loader --dev</code>
+  <hr>
+  <h2>Servidor web de desarrollo</h2>
+  1. Instalar las dependencias de desarrollo <code>yarn add webpack-dev-server --dev</code>
+  <hr>
+  <h2>Manejo de archivos</h2>
+  1. Instalar las dependencias de desarrollo <code>yarn add file-loader --dev</code>
+  <div id="div-img"></div>
+  
+</body>
+</html>
