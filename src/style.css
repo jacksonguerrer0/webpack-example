@@ -11,10 +11,22 @@ body{
   font-size: 18px;
   font-family: sans-serif;
   color: white;
-  /* background-color: dimgray; */
-  background-image: url("./assets/paisaje.jpg");
+  background-color: dimgray;
+  background-image: url("./assets/logoPro.png");
+  background-repeat: none;
+  background-size: cover;
+  background-position: center;
 }
 img{
   width: 20%;
   height: auto;
+}
+nav{
+  display: flex;
+  justify-content: space-evenly;
+  background-color: cadetblue;
+}
+a{
+  color: whitesmoke;
+  font-size: 2rem;
 }

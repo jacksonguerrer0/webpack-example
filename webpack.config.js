@@ -1,18 +1,33 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin"),
-  MiniCssExtractPlugin = require("mini-css-extract-plugin")
+  MiniCssExtractPlugin = require("mini-css-extract-plugin"),
+  path = require("path");
 
 module.exports = {
-  // output: {
-  //   publicPath: '/'
-  // },
+  entry:{
+    js: './src/index.js',
+    react: './src/react.js',
+    ts: './src/ts.js',
+  },
+  output: {
+    filename:'[name].[chunkhash].js',
+    // output path is required for `clean-webpack-plugin`
+    // path: path.resolve(__dirname, "dist"),
+    // this places all images processed in an image folder
+    assetModuleFilename: "assets/[name][ext][query]",
+  },
   module: {
     rules: [
       {
-        test: /\.js$/i,
+        test: /\.jsx?$/i,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.html$/i,
@@ -28,68 +43,45 @@ module.exports = {
       },
       {
         test: /\.(scss|css|sass)/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: { publicPath: "" },
+          }, 
+          "css-loader",
+          "sass-loader"]
       },
       {
         test: /\.(jpe?g|png|gif|svg|webp)$/i,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "./assets/",
-              useRelativePath: true,
-            },
-          },
-        ],
+        // use: [ "file-loader?name=assets/[name].[ext]" ]
+        type: "asset",
+        use: ["image-webpack-loader"]
       },
-      // {
-      //   test : /\.scss|.css$/,
-      //   use : [ 'style-loader', 'css-loader', 'sass-loader' ]
-      // }, {
-      //   test : /\.(png|jp(e*)g|svg)$/,
-      //   use : [{
-      //     loader : 'url-loader',
-      //     options : {
-      //       limit : 800,
-      //       name : 'assets/[hash]-[name].[ext]'
-      //     }
-      //   }]
-      // }, 
-      // {
-      //   test: /\.(sa|sc|c)ss$/,
-      //   use: [
-      //     MiniCssExtractPlugin.loader,
-      //     "css-loader",
-      //     "sass-loader",
-      //   ],
-      // },
-      // {
-      //   test: /\.(jpe?g|png|gif|svg|webp)$/i,
-      //   use: [
-      //     {
-      //       loader: "file-loader",
-      //       options: {
-      //         name: "[name].[ext]",
-      //         outputPath: "assets/",
-      //         useRelativePath: true,
-      //       },
-      //     },
-      //   ],
-      // },
-      // {
-      //   test: /\.(woff)$/i,
-      //   use: ["file-loader?name=assets/[name].[ext]"],
-      // },
     ]
   },
   plugins: [
+    // new HtmlWebpackPlugin({
+    //   template: "./src/index.html",
+    //   filename: "index.html"
+    // }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      filename: "index.html"
+      filename: "index.html",
+      chunks: ["js"],
+      hash: true
     }),
-    new MiniCssExtractPlugin({
-      filename: "css/style.css"
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      filename: "react.html",
+      chunks: ["react"],
+      hash: true
     }),
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      filename: "ts.html",
+      chunks: ["ts"],
+      hash: true
+    }),
+    new MiniCssExtractPlugin(),
   ]
 }

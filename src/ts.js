@@ -1,11 +1,11 @@
 import style from './style.css'
 import img from './assets/cascada.jpg'
 import db from './db.json'
-import { HelloWorld } from './components/helloWorld'
+import { HelloWorld } from './components/helloWorld.ts'
 
 const $nav = document.createElement('nav'),
   $title = document.querySelector('h1'),
-  hello = new HelloWorld('Vanilla Js :)')
+  hello = new HelloWorld('TypeScript :)')
 
   db.links.forEach(ele => {
     $nav.innerHTML += `<a href=${ele[1]}>${ele[0]}</a>
